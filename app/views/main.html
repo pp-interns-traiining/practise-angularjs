@@ -1,0 +1,47 @@
+<button class="btn btn-info" ng-click="goToRandomMovie()">View Random Movie</button>
+
+<div class="col-xs-1">
+  <span class="glyphicon glyphicon-menu-right" ng-show="closed" ng-click="closed=false"></span>
+  <span class="glyphicon glyphicon-menu-down" ng-hide="closed" ng-click="closed=true"></span>
+</div>
+<div class="col-xs-4" ng-hide="closed">
+  <h2>Add a movie?</h2>
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" class="form-control" ng-keyup="validateTitle()" placeholder="Enter title" ng-model="movie.title">
+  </div>
+  <div class="form-group">
+    <label>Image</label>
+    <input type="text" class="form-control" placeholder="Image" ng-model="movie.image">
+    <div ng-show="preview()">
+      <h4>Preview</h4>
+      <img ng-src="{{movie.image}}" height="50px;" width="50px;" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Category</label>
+    <select class="form-control" ng-change="checkCategorySelected()" ng-model="movie.category">
+      <option value="">-</option>
+      <option value="Epic">Epic</option>
+      <option value="Awesome">Awesome</option>
+      <option value="Average">Average</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <textarea class="form-control" ng-model="movie.description"></textarea>
+  </div>
+  <button class="btn btn-info" ng-show="isValid()" ng-click="addMovie()">Add</button>
+</div>
+</div>
+
+<div class="container">
+<div ng-repeat="movie in movies">
+  <a ng-href="movie/{{movie.id}}/{{movie.title}}">
+  <h3 ng-bind="movie.title"></h3>
+  </a>
+  <h6 ng-bind="movie.category"></h6>
+  <img ng-src="{{movie.image}}" alt="homer" height="40px;" width="40px;">
+  <p>{{movie.description}}</p>
+</div>
+</div>
